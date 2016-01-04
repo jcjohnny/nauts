@@ -1,0 +1,64 @@
+<%= form_for(@article, html: {multipart: true}) do |f| %>
+  <ul>
+  <% @article.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+
+
+
+  </ul>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </p>
+  <p>
+      <%= f.label :rating %>
+      <%= f.number_field :rating %>
+  </p>
+  <p>
+      <%= f.label :location %>
+      <%= f.text_field :location %>
+  </p>
+  <p>
+      <%= f.label :address %>
+      <%= f.text_field :address %>
+  </p>
+  <p>
+      <%= f.label :city %>
+      <%= f.text_field :city %>
+  </p>
+  <p>
+      <%= f.label :state %>
+      <%= f.text_field :state %>
+  </p>
+  <p>
+      <%= f.label :zipcode %>
+      <%= f.number_field :zipcode %>
+  </p>
+  <p>
+      <%= f.label :sport %>
+      <%= f.text_field :sport %>
+  </p>
+  <p>
+      <%= f.label :players %>
+      <%= f.number_field :players %>
+  </p>
+  <p>
+    <% if @article.image.exists? %>
+        <%= image_tag @article.image.url %><br/>
+    <% end %>
+    <%= f.label :image, "Attach a New Image" %><br />
+    <%= f.file_field :image %>
+  </p>
+  <p>
+      <%= f.label :tag_list %> <br />
+      <%= f.text_field :tag_list %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

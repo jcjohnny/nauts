@@ -1,0 +1,73 @@
+<script src="//maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry"></script>
+<script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"></script>
+
+<div class="game-info">
+
+<ul id="article-control">
+    <li><div id ="back-article"><%= link_to '<< Back to Articles List', articles_path %></div></li>
+    <li><div id ="delete-article"><%= link_to 'delete', article_path(@article), method: :delete, data: {confirm: "Really delete the article?"} %></div></li>
+    <li><div id= "edit-article"><%= link_to 'edit', edit_article_path(@article) %></div>
+</li>
+</ul>
+
+
+<div id= "googlymap">
+  <div id="map" style='height: 400px;'></div>
+</div>
+
+<p>
+  Tags:
+  <% @article.tags.each do |tag| %>
+    <%= link_to tag.name, tag_path(tag) %>
+  <% end %>
+</p>
+<div id="h1-title"><h1><%= @article.title %></h1></div>
+<% if @article.image.exists? %>
+    <%= image_tag @article.image.url %><br/>
+<% end %>
+<p><%= @article.body %></p>
+<p>address: <%= @article.geo_address %></p>
+<p>sport:<%= @article.sport %></p>
+<p>date <%= @article.created_at.strftime("%b %d, %Y") %> @ <%=@article.created_at.strftime("%l %M, %S")   %></p>
+<p><%= @article.players %> joined out of <%= @article.player_names.length %>: <%= @article.player_names.join(", ") %></p>
+<p>
+    click the button to join this event! <button type="button">Join</button>
+</p>
+</div>
+
+<div class="comments-area">
+<h3>Comments (<%=@article.comments.size %>)</h3>
+<div id="commeter"><%= render partial: 'articles/comment', collection: @article.comments %></div>
+
+
+    <div id="comments_form">
+      <%= render partial: 'comments/form' %>
+    </div>
+
+    <div id="comments-login">
+        <p>
+            please login to post a message
+        </p>
+        <%= button_to 'Login', '/login', method: :get  %>
+    </div>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  markers = handler.addMarkers([
+    {
+      "lat": <%= @article.latitude %>,
+      "lng": <%= @article.longitude %>,
+    }
+  ]);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+  handler.getMap().setZoom(15);
+});
+
+</script>

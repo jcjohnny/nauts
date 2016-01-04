@@ -1,0 +1,223 @@
+# IntercomRails
+
+The easiest way to install Intercom in a rails app.
+
+For interacting with the Intercom REST API, use the `intercom` gem (https://github.com/intercom/intercom-ruby)
+
+## Installation
+Add this to your Gemfile:
+
+```ruby
+gem "intercom-rails"
+```
+
+Then run:
+
+```
+bundle install
+```
+
+Take note of your `app_id` from [here](https://app.intercom.io/apps/api_keys) and generate a config file:
+
+```
+rails generate intercom:config YOUR-APP-ID
+```
+
+To make installing Intercom as easy as possible, where possible a `<script>` tag **will be automatically inserted before the closing `</body>` tag**. For most Rails apps, **you won't need to do any extra config**. Having trouble? Check out troubleshooting below.
+
+### Disabling automatic insertion
+
+To disable automatic insertion for a particular controller or action you can:
+
+```ruby
+  skip_after_filter :intercom_rails_auto_include
+```
+
+### Troubleshooting
+If it's not working make sure:
+
+* You've generated a config file with your `app_id` as detailed above.
+* Your user object responds to an `id` or `email` method.
+* Your current user is accessible in your controllers as `current_user` or `@user`, if not in `config/initializers/intercom.rb`:
+* If you want the Intercom Messenger to be available when there is no current user,  set `config.include_for_logged_out_users = true` in your config and sign up for the [Acquire](https://www.intercom.io/live-chat) package.
+
+```ruby
+  config.user.current = Proc.new { current_user_object }
+```
+
+Feel free to mail us: team@intercom.io, if you're still having trouble.
+
+## Configuration
+
+### API Secret
+If you want to use secure mode, ensure you set your API secret in `config/initializers/intercom.rb`:
+
+```ruby
+  config.api_secret = '123456'
+```
+
+### User Custom data attributes
+You can associate any attributes, specific to your app, with a user in Intercom.
+For custom data attributes you want updated on every request set them in `config/initializers/intercom.rb`, the latest value will be sent to Intercom on each page visit.
+
+Configure what attributes will be sent using either a:
+
+  * `Proc` which will be passed the current user object
+  * Or, a method which will be sent to the current user object
+
+e.g.
+
+```ruby
+  config.user.custom_data = {
+    :plan => Proc.new { |user| user.plan.name },
+    :is_paid => Proc.new { |user| user.plan.present? },
+    :email_verified => :email_verified?
+  }
+```
+
+In some situations you'll want to set some custom data attribute specific to a request.
+You can do this using the `intercom_custom_data` helper available in your controllers:
+
+```ruby
+class AppsController < ActionController::Base
+  def activate
+    intercom_custom_data.user[:app_activated_at] = Time.now
+    ...
+  end
+
+  def destroy
+    intercom_custom_data.user[:app_deleted_at] = Time.now
+    ...
+  end
+end
+```
+
+Attributes must be accessible in order to sync with intercom.
+Additionally, attributes ending in "_at" will be parsed as times.
+
+### Companies
+
+By default, Intercom treats all Users as unrelated individuals. If for example you know users are part of a company, you can group them as such.
+
+Read more about it here http://docs.intercom.io/configuring-Intercom/grouping-users-by-company
+
+Basic usage is as follows - in `config/initializers/intercom.rb`
+
+```ruby
+config.company.current = Proc.new { current_company }
+```
+
+and like with Users, you can set custom attribute on companies too:
+
+```ruby
+config.company.custom_data = {
+  :number_of_messages => Proc.new { |app| app.messages.count },
+  :is_interesting => :is_interesting?
+}
+```
+
+### Live Chat / Acquire
+With our [Acquire package](https://www.intercom.io/live-chat), Intercom Messenger now works with logged out users and visitors to your web site. Include the Intercom snippet on every page by setting:
+
+```ruby
+  config.include_for_logged_out_users = true
+```
+
+### Messenger
+Intercom includes an in-app messenger which allows a user to read messages and start conversations.
+
+By default Intercom will add a button that opens the messenger to the page. If you want to customize the style of the link that opens the messenger:
+
+```ruby
+  config.inbox.style = :custom
+```
+
+With this option enabled, clicks on any element with an id of `Intercom` will open the messenger. So the simplest option here would be to add something like the following to your layout:
+
+```html
+  <a id="Intercom">Support</a>
+```
+
+You can read more about configuring the messenger in your applications settings, within Intercom.
+
+### Environments
+
+By default Intercom will be automatically inserted in development and production Rails environments. If you would like to specify the environments in which Intercom should be inserted, you can do so as follows:
+
+```ruby
+  config.enabled_environments = ["production"]
+```
+
+### Manually Inserting the Intercom Javascript
+
+Some situations may require manually inserting the Intercom script tag. If you simply wish to place the Intercom javascript in a different place within the page or, on a page without a closing `</body>` tag:
+
+```erb
+  <%= intercom_script_tag %>
+```
+
+This will behave exactly the same as the default auto-install. If for whatever reason you can't use auto-install, you can also provide a hash of user data as the first argument:
+
+```erb
+<% if logged_in? %>
+  <%= intercom_script_tag({
+    :app_id => 'your-app-id',
+    :user_id => current_user.id,
+    :email => current_user.email,
+    :name => current_user.name,
+    :created_at => current_user.created_at,
+    :custom_data => {
+      'plan' => current_user.plan.name
+    }
+  }) %>
+<% end %>
+```
+
+You can also override `IntercomRails::Config` options such as your `api_secret`, or widget configuration with a second hash:
+
+```erb
+<% if logged_in? %>
+  <%= intercom_script_tag({
+    :app_id => 'your-app-id',
+    :user_id => current_user.id,
+    :email => current_user.email,
+    :name => current_user.name,
+    :created_at => current_user.created_at
+  }, {
+    :secret => 'your-apps-api-secret',
+    :widget => {:activator => '#Intercom'}
+  }) %>
+<% end %>
+```
+## Importing your users
+To get started faster with Intercom, `IntercomRails` includes a Rake task that will do an initial import of your users:
+
+```
+rake intercom:import
+```
+
+Any custom data defined in `config/initializers/intercom.rb` will also be sent.
+
+## Running tests/specs
+
+specs should run on a clean clone of this repo, using the following commands. (developed against ruby 2.1.2 and 1.9.3)
+
+```
+bundle install
+bundle exec rake spec
+or
+bundle exec rspec spec/
+```
+
+## Contributors
+
+- Dr Nic Williams (@drnic) - provided a rails generator for adding the Intercom javascript tag into your layout.
+- Alexander Chaychuk (@sashich) - fixed bug in user detection when users not persisted (e.g. new session view with devise).
+
+## License
+
+intercom-rails is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+
+## Copyright
+
+Copyright (c) 2011-2012 Intercom, Inc.  All rights reserved.

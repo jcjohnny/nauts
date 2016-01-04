@@ -1,0 +1,11 @@
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins";
+@import "twitter/bootstrap/glyphicons";
+
+@mixin myButton($degrees: 90) {
+  @include rotate($degrees);
+}
+
+#individual-my-button {
+  @include myButton(180);
+}

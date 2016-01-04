@@ -1,0 +1,38 @@
+<script src="//maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry"></script>
+<script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"></script>
+
+<div id="h1-title"><h1>All Sports Events</h1></div>
+
+<div class="gmapper">
+  <div id="map" style=' height: 400px;'></div>
+</div>
+
+<div class="new-sport">
+<%= link_to "Create a New Sports Event", new_article_path, class: "new_article" %>
+</div>
+<div id= "articles-holder">
+  <% @articles.each do |article| %>
+      <div class="all_articles">
+      <h2><%= link_to article.title, article_path(article) %></h2>
+      <p class="joined_body"><%= article.body %></p>
+      <p class="joined_players"><%= article.player_names.length %> joined out of <%= article.players%>: <%= article.player_names.join(", ")%></p>
+      </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    var markers = handler.addMarkers([
+
+        <% @articles.each do |article| %>
+            { lat: <%= article.latitude %>, lng: <%= article.longitude %>,
+                infowindow: "<%= article.title %>"
+            },
+        <% end %>
+
+    ]);
+handler.bounds.extendWith(markers);
+handler.fitMapToBounds();
+});
+</script>
