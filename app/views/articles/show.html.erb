@@ -4,7 +4,7 @@
 <div class="game-info">
 
 <ul id="article-control">
-    <li><div id ="back-article"><%= link_to '<< Back to Articles List', articles_path %></div></li>
+    <li><div id ="back-article"><%= link_to '<< Back to Articles List', articles_path, 'data-no-turbolink' => true%></div></li>
     <li><div id ="delete-article"><%= link_to 'delete', article_path(@article), method: :delete, data: {confirm: "Really delete the article?"} %></div></li>
     <li><div id= "edit-article"><%= link_to 'edit', edit_article_path(@article) %></div>
 </li>

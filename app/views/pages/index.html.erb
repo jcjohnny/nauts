@@ -32,3 +32,18 @@
 <a href="/articles"><div class= "check-sports">
 become a sports juggernaut at all events
 </div></a>
+
+<div class="upcoming">
+    <div class="upcoming-col">
+    <h3>become a sports juggernaut at the next event:</h3>
+    <h2><%= @articles.order(created_at: :desc)[0].title %></h2>
+    <p>@ <%= @articles.order(created_at: :desc)[0].location %></p>
+    </div>
+
+    <div class="upcoming-col">
+        <h2>starting at</h2>
+        <p class="dater"><%= @articles.order(created_at: :desc)[0].created_at.strftime("%b %d, %Y") %></p>
+        <p><%= @articles.order(created_at: :desc)[0].created_at.strftime("%l %M, %S") %></p>
+        <a href="articles/<%= @articles.order(created_at: :desc)[0].id %>"><p class="upcoming-link">check it</p></a>
+    </div>
+</div>

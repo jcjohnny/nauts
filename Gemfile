@@ -52,7 +52,7 @@ gem 'thin'
 gem 'eventmachine' # , '>=1.07'
 gem "paperclip"
 gem 'geocoder'
-gem 'gmaps4rails'
+gem 'gmaps4rails', '~> 2.0.1', git: 'https://github.com/fiedl/Google-Maps-for-Rails.git'
 
 group :development, :test do
   gem 'byebug'

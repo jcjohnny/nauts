@@ -13,7 +13,7 @@
 <div id= "articles-holder">
   <% @articles.each do |article| %>
       <div class="all_articles">
-      <h2><%= link_to article.title, article_path(article) %></h2>
+      <h2><%= link_to article.title, article_path(article), 'data-no-turbolink' => true %></h2>
       <p class="joined_body"><%= article.body %></p>
       <p class="joined_players"><%= article.player_names.length %> joined out of <%= article.players%>: <%= article.player_names.join(", ")%></p>
       </div>
