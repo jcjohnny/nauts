@@ -2,8 +2,8 @@
 
 <%= form_for [ @article, @comment ] do |f| %>
   <p>
-    <%= f.label :author_name, "title"  %><br/>
-    <%= f.text_field :author_name %>
+    <%= f.label :author_name, current_user.email %><br/>
+    <%= f.text_field :author_name, :value => current_user.email, class: "no-show-user" %>
   </p>
 
   <p>

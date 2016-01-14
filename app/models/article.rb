@@ -2,6 +2,9 @@ class Article < ActiveRecord::Base
     has_many :comments
     has_many :taggings
     has_many :tags, through: :taggings
+    has_many :userarticles
+    has_many :users, through: :userarticles
+    
     has_attached_file :image
     validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
@@ -27,5 +30,22 @@ class Article < ActiveRecord::Base
         tag_names = tags_string.split(",").collect{|s| s.strip.downcase}.uniq
         new_or_found_tags = tag_names.collect { |name| Tag.find_or_create_by(name: name) }
         self.tags = new_or_found_tags
+    end
+
+    def user_list
+        self.users.collect do |user|
+            user.email
+        end.join(", ")
+    end
+
+    def user_list=(users_string)
+        user_names = users_string.split(",").collect{|s| s.strip.downcase}.uniq
+        new_or_found_users = user_names.collect { |email| User.find_or_create_by(email: email) }
+        self.users = new_or_found_users
+    end
+
+    def add_user_article
+        @user = current_user
+        @article.users.push(@user)
     end
 end

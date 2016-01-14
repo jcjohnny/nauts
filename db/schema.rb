@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160103192137) do
+ActiveRecord::Schema.define(version: 20160105191547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,16 @@ ActiveRecord::Schema.define(version: 20160103192137) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "userarticles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "userarticles", ["article_id"], name: "index_userarticles_on_article_id", using: :btree
+  add_index "userarticles", ["user_id"], name: "index_userarticles_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.text     "about"
@@ -141,4 +151,6 @@ ActiveRecord::Schema.define(version: 20160103192137) do
   add_foreign_key "comments", "articles"
   add_foreign_key "taggings", "articles"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "userarticles", "articles"
+  add_foreign_key "userarticles", "users"
 end

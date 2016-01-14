@@ -4,10 +4,6 @@ class ArticlesController < ApplicationController
 
     def index
         @articles = Article.all
-        @hash = Gmaps4rails.build_markers(@articles) do |article, marker|
-          marker.lat article.latitude
-          marker.lng article.longitude
-        end
     end
 
     def show
@@ -25,6 +21,7 @@ class ArticlesController < ApplicationController
         @article = Article.new(article_params)
         if @article.save
             flash.notice = "You've succesfully created the Article"
+            @article.users.push(current_user)
             redirect_to @article
         else
             render new_article_path
@@ -49,5 +46,6 @@ class ArticlesController < ApplicationController
         flash.notice = "Article Destroyed"
         redirect_to articles_path(@articles)
     end
+
 
 end

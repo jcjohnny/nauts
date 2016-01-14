@@ -4,6 +4,9 @@
 <div class="game-info">
 
 <ul id="article-control">
+    <% if @article.users.length >= 1 %>
+    <a href='/users/<%=@article.users.first.id %>'> <%= @article.users.first.email %> </a>
+    <% end %>
     <li><div id ="back-article"><%= link_to '<< Back to Articles List', articles_path, 'data-no-turbolink' => true%></div></li>
     <li><div id ="delete-article"><%= link_to 'delete', article_path(@article), method: :delete, data: {confirm: "Really delete the article?"} %></div></li>
     <li><div id= "edit-article"><%= link_to 'edit', edit_article_path(@article) %></div>
@@ -29,28 +32,41 @@
 <p>address: <%= @article.geo_address %></p>
 <p>sport:<%= @article.sport %></p>
 <p>date <%= @article.created_at.strftime("%b %d, %Y") %> @ <%=@article.created_at.strftime("%l %M, %S")   %></p>
-<p><%= @article.players %> joined out of <%= @article.player_names.length %>: <%= @article.player_names.join(", ") %></p>
-<p>
-    click the button to join this event! <button type="button">Join</button>
-</p>
+<div class="players-list">
+    <ul>
+        <% @article.users.each do |users|  %>
+        <li><%= users.email %></li>
+        <% end %>
+    </ul>
 </div>
 
+<p>
+    click the button to join this event!
+
+
+
+</p>
+
+</div><!--gameinfo div  -->
 <div class="comments-area">
 <h3>Comments (<%=@article.comments.size %>)</h3>
 <div id="commeter"><%= render partial: 'articles/comment', collection: @article.comments %></div>
 
-
+    <% if user_signed_in? %>
     <div id="comments_form">
       <%= render partial: 'comments/form' %>
-    </div>
+      <%= current_user.name %></br>
+      <%= current_user.email %></br>
 
+    </div>
+    <% else %>
     <div id="comments-login">
         <p>
             please login to post a message
         </p>
         <%= button_to 'Login', '/login', method: :get  %>
     </div>
-
+    <% end %>
 </div>
 
 

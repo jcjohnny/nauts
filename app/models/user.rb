@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
     validates_presence_of :email
     mount_uploader :image, ImageUploader
     has_many :authorizations
+    has_many :userarticles
+    has_many :articles, through: :userarticles
 
     def self.new_with_session(params,session)
         if session["devise.user_attributes"]
