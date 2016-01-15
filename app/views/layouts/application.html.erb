@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>NautsRails</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 
@@ -9,43 +10,39 @@
 </head>
 <body>
 
+<div class="leftbar">
     <div class="navbar-header">
         <a href="../" class="navbar-brand"><img src="../assets/nautslogo.svg" alt=""></a>
     </div>
 
-            <ul class="dropdown-menu" aria-labelledby="themes">
-              <li><a tabindex="-1" href="/">Default</a></li>
-              <li class="divider"></li>
-              <li><a tabindex="-1" href="../tags/1">basketball</a></li>
-              <li><a tabindex="-1" href="../tags/2">football</a></li>
-              <li><a tabindex="-1" href="../tags/3">soccer</a></li>
-              <li><a tabindex="-1" href="../tags/4">baseball</a></li>
-            </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+            <li><%= link_to current_user.email, current_user %></li>
+            <li><%= link_to "Logout", destroy_user_session_path %></li>
+        <% else %>
+            <li><%= link_to "Sign in", new_user_session_path %></li>
+        <% end %>
+    </ul>
 
-    
-
-        <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
-          <li><%= link_to current_user.name, current_user %></li>
-          <li><%= link_to "Logout", destroy_user_session_path %></li>
-          <% else %>
-          <li><%= link_to "Sign in", new_user_session_path %></li>
-          <% end %>
-        </ul>
-
-
-
-
-
-
-  <div class="container">
-   <div class="page-header" id="banner">
-    <div class="row">
-      <p class="flash"><%= flash.notice %></p>
-      <%= yield %>
-    </div>
-  </div>
 </div>
+
+
+
+
+<p class="flash"><%= flash.notice %></p>
+
+    <div class="container">
+
+
+
+
+        <div class="page-header" id="banner">
+            <div class="row">
+                <%= yield %>
+            </div>
+        </div>
+
+    </div>
 
 
 </body>
