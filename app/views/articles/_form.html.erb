@@ -14,9 +14,24 @@
     <%= f.text_area :body %>
   </p>
   <p>
-      <%= f.label :rating %>
-      <%= f.number_field :rating %>
+      <%= f.label :setting %>
+      <%= f.text_field :setting %>
   </p>
+  <p>
+      <%= f.label :month %>
+      <%= f.text_field :month %>
+  </p>
+
+  <p>
+      <%= f.label :day %>
+      <%= f.number_field :day %>
+  </p>
+
+  <p>
+      <%= f.label :time %>
+      <%= f.text_field :time %>
+  </p>
+
   <p>
       <%= f.label :location %>
       <%= f.text_field :location %>
@@ -45,13 +60,7 @@
       <%= f.label :players %>
       <%= f.number_field :players %>
   </p>
-  <p>
-    <% if @article.image.exists? %>
-        <%= image_tag @article.image.url %><br/>
-    <% end %>
-    <%= f.label :image, "Attach a New Image" %><br />
-    <%= f.file_field :image %>
-  </p>
+
   <p>
       <%= f.label :tag_list %> <br />
       <%= f.text_field :tag_list %>

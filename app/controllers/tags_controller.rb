@@ -5,6 +5,8 @@ class TagsController < ApplicationController
     end
 
     def show
+        @articles = Article.all
+        @comments = Comment.all
         @tag = Tag.find(params[:id])
     end
 

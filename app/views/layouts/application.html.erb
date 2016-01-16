@@ -15,14 +15,37 @@
         <a href="../" class="navbar-brand"><img src="../assets/nautslogo.svg" alt=""></a>
     </div>
 
-    <ul class="nav navbar-nav navbar-right">
+    <div class="nav navbar-nav navbar-left">
         <% if user_signed_in? %>
-            <li><%= link_to current_user.email, current_user %></li>
-            <li><%= link_to "Logout", destroy_user_session_path %></li>
+            <div><%= link_to current_user.email, current_user %></div>
+            <div><%= link_to "Logout", destroy_user_session_path %></div>
+            <div class="user-info">
+                <div class="articles-created">
+                    <h2>Sports Started</h2>
+
+                    <% current_user.articles.take(5).each do |art| %>
+                    <p><%= link_to art.title, article_path(art), 'data-no-turbolink' => true %></p>
+                    <% end %>
+                </div>
+                <div class="comments">
+                    <h2>Comments</h2>
+                    <% @comments.where(:author_name => "donkey@donkey.com").take(5).each do |art| %>
+                        <p>
+                        <%= link_to art.body, article_path(art.article_id), 'data-no-turbolink' => true %>
+                        </p>
+                    <% end %>
+                </div>
+
+            <div class="articles-joined">
+
+            </div>
+
+            </div>
         <% else %>
-            <li><%= link_to "Sign in", new_user_session_path %></li>
+            <div><%= link_to "Sign in", new_user_session_path %></div>
+            <p>please sign-in or login to start games or join them!</p>
         <% end %>
-    </ul>
+    </div>
 
 </div>
 

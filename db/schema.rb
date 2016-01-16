@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20160105191547) do
   create_table "articles", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
-    t.integer  "rating"
     t.string   "address"
     t.integer  "zipcode"
     t.string   "city"
@@ -63,6 +62,10 @@ ActiveRecord::Schema.define(version: 20160105191547) do
     t.float    "latitude"
     t.float    "longitude"
     t.text     "location"
+    t.text     "setting"
+    t.text     "month"
+    t.float    "day"
+    t.float    "time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"

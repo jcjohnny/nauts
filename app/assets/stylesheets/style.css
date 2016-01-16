@@ -28,21 +28,15 @@ a, a:link, a:visited {
     width: 280px;
 }
 
-.all_articles {
-    float: left;
-    width: 28%;
-    height: 150px;
-    border: 4px solid orange;
-    margin: 1%;
-    padding: 1%;
-}
 
 p.flash {
     position: absolute;
     bottom: 2%;
     left: 2%;
     border: 1px solid;
-}.dropdown {
+}
+
+.dropdown {
     position: relative;
     display: inline-block;
 }
@@ -59,4 +53,35 @@ p.flash {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.all_articles {
+    float: left;
+    min-width: 300px;
+    width: 28%;
+    height: 150px;
+    border: 4px solid orange;
+    margin: 1%;
+    padding: 1%;
+}
+
+.view-holder {
+    display: inline-block;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.view {
+    float: left;
+    margin-right: 10px;
+}
+
+a.new_article {
+    float: right;
+    margin-top: 2.5%;
+}
+
+.hideforplayer {
+    display: none;
 }

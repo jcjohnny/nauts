@@ -3,7 +3,6 @@ class CreateArticles < ActiveRecord::Migration
     create_table :articles do |t|
         t.string :title
         t.text :body
-        t.integer :rating
         t.string :address
         t.integer :zipcode
         t.string :city
@@ -14,6 +13,11 @@ class CreateArticles < ActiveRecord::Migration
         t.float :latitude
         t.float :longitude
         t.text :location
+        t.text :setting
+        t.text :month
+        t.float :day
+        t.float :time
+
         t.timestamps
     end
   end

@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
     has_many :tags, through: :taggings
     has_many :userarticles
     has_many :users, through: :userarticles
-    
+
     has_attached_file :image
     validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
@@ -38,14 +38,5 @@ class Article < ActiveRecord::Base
         end.join(", ")
     end
 
-    def user_list=(users_string)
-        user_names = users_string.split(",").collect{|s| s.strip.downcase}.uniq
-        new_or_found_users = user_names.collect { |email| User.find_or_create_by(email: email) }
-        self.users = new_or_found_users
-    end
 
-    def add_user_article
-        @user = current_user
-        @article.users.push(@user)
-    end
 end
