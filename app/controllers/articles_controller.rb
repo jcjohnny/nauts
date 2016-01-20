@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
     end
 
     def show
+        @articles = Article.all
         @comments = Comment.all
         @article = Article.find(params[:id])
         @comment = Comment.new
@@ -15,12 +16,14 @@ class ArticlesController < ApplicationController
     end
 
     def new
+        @articles = Article.all
         @comments = Comment.all
         @article = Article.new
 
     end
 
     def create
+        @articles = Article.all
         @comments = Comment.all
         @article = Article.new(article_params)
         if @article.save
@@ -33,11 +36,13 @@ class ArticlesController < ApplicationController
     end
 
     def edit
+        @articles = Article.all
         @comments = Comment.all
         @article = Article.find(params[:id])
     end
 
     def update
+        @articles = Article.all
         @comments = Comment.all
         @article = Article.find(params[:id])
             if (@article.users.exists?(email: current_user.email) != true) || (@article.users.length >= @article.players)
@@ -49,6 +54,7 @@ class ArticlesController < ApplicationController
     end
 
     def destroy
+        @articles = Article.all
         @comments = Comment.all
         @article = Article.find(params[:id])
         @article.tags = []

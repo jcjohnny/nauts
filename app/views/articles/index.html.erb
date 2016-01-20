@@ -24,7 +24,7 @@
     <%= link_to "Start A Sports Game", new_article_path, class: "new_article" %>
 
 <div class="gmapper">
-    <div id="map" style=' height: 400px;'></div>
+    <div id="map" style=' height: 350px;'></div>
 </div>
 
 
@@ -32,21 +32,21 @@
     <% @articles.each do |article| %>
         <div class="all_articles">
             <div class="general-data">
-                <h2><%= link_to article.title, article_path(article), 'data-no-turbolink' => true %></h2>
-                <p> <%= article.setting %></p>
-                <p> <%= article.location %></p>
-                <p class="joined_body"><%= article.body %></p>
+                <h2 class="art-title"><%= link_to article.title.length >= 20 ? article.title.first(20) + "..." : article.title, article_path(article), 'data-no-turbolink' => true %></h2>
+                <p> Setting: <%= article.setting %> <br>
+                 Location: <%= article.location %></p>
+                <p class="joined_body"><%= article.body.length >= 60 ? article.body.first(60) + "..." : article.body  %></p>
             </div>
             <div class="game-date">
-                <p class="month"><%= article.month %></p>
-                <h2 class="day"><%= article.day %></h2>
-                <p class="time"><%=  article.time%></p>
+                <p class="month"><%= article.month.to_s.first(3) %></p>
+                <h2 class="day"><%= article.day.to_i.floor %></h2>
+                <p class="time"><%=  article.time %> pm</p>
             </div>
             <div class="players"></div>
                 <p class="joined_players"><%= article.player_names.length %> spots filled: <%= article.players%> left </p>
-                <p><span class=posted>posted by: </span>
+                <p class = "postedby">posted by: </span>
                 <% if article.users.length >= 1 %>
-                    <a href='/users/<%=article.users.first.id %>'> <%= article.users.first.email.split('@')[0] %> </a>
+                    <a href='/users/<%=article.users.first.id %>'><span class=posted> <%= article.users.first.email.split('@')[0] %> </span></a>
                 <% end %>
             </p>
         </div>

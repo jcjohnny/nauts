@@ -16,7 +16,7 @@ class CreateArticles < ActiveRecord::Migration
         t.text :setting
         t.text :month
         t.float :day
-        t.float :time
+        t.text :time
 
         t.timestamps
     end

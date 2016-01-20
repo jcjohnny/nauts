@@ -17,8 +17,7 @@
 
     <div class="nav navbar-nav navbar-left">
         <% if user_signed_in? %>
-            <div><%= link_to current_user.email, current_user %></div>
-            <div><%= link_to "Logout", destroy_user_session_path %></div>
+            <div class="useruser"><%= link_to current_user.email, current_user %> <span class="loggerout"><%= link_to "Logout", destroy_user_session_path %></span></div>
             <div class="user-info">
                 <div class="articles-created">
                     <h2>Sports Started</h2>
@@ -26,19 +25,25 @@
                     <% current_user.articles.take(5).each do |art| %>
                     <p><%= link_to art.title, article_path(art), 'data-no-turbolink' => true %></p>
                     <% end %>
-                </div>
-                <div class="comments">
+
+
                     <h2>Comments</h2>
-                    <% @comments.where(:author_name => "donkey@donkey.com").take(5).each do |art| %>
+                    <% @comments.where(:author_name => current_user.email).take(5).each do |art| %>
                         <p>
                         <%= link_to art.body, article_path(art.article_id), 'data-no-turbolink' => true %>
                         </p>
                     <% end %>
+                <h2>Games Joined</h2>
+                <% @articles.take(5).each do |art| %>
+                <% limit = 0 %>
+                <% if art.users.exists?(:email => current_user.email) %>
+                    <p><%= link_to art.title, article_path(art), 'data-no-turbolink' => true %></p>
+                    <% limit += 1 %>
+                    <% break if limit == 5 %>
+                <% end %>
+                <% end %>
                 </div>
 
-            <div class="articles-joined">
-
-            </div>
 
             </div>
         <% else %>
@@ -51,20 +56,15 @@
 
 
 
-
+<% if flash.notice %>
 <p class="flash"><%= flash.notice %></p>
-
+<% end %>
     <div class="container">
-
-
-
-
         <div class="page-header" id="banner">
             <div class="row">
                 <%= yield %>
             </div>
         </div>
-
     </div>
 
 

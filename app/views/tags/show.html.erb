@@ -1,23 +1,68 @@
 <script src="//maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry"></script>
 <script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"></script>
 
-<h1>Articles Tagged with <%= @tag.name %></h1>
+<div class="view-holder">
+    <div class="now-viewing view">
+        Now displaying
+    </div>
+
+    <div class="dropdown view">
+        <% if current_page? ('/tags/1') %>
+        <span>Basketball</span>
+        <% elsif current_page? ('/tags/2') %>
+        <span>Football</span>
+        <% elsif current_page? ('/tags/3') %>
+        <span>Soccer</span>
+        <% elsif current_page? ('/tags/4') %>
+        <span>Baseball</span>
+        <% elsif current_page? ('/') %>
+        <span>All Sports</span>
+        <% else %>
+        <span> <%= @tag.name %><span>
+        <% end %>
+
+        <div class="dropdown-content">
+            <p><a href="../tags/1">all sports</a></p>
+            <p><a href="../tags/1">basketball</a></p>
+            <p><a href="../tags/2">football</a></p>
+            <p><a href="../tags/3">soccer</a></p>
+            <p><a href="../tags/4">baseball</a></p>
+        </div>
+    </div>
+    <div class="end-viewing view">
+        games
+    </div>
+</div>
+
+
+    <%= link_to "Start A Sports Game", new_article_path, class: "new_article" %>
 
 <div class="gmapper">
   <div id="map" style=' height: 400px;'></div>
 </div>
 
-<div class="new-sport">
-<%= link_to "Create a New Sports Event", new_article_path, class: "new_article" %>
-</div>
-
 <div id= "articles-holder">
   <% @tag.articles.each do |article| %>
-    <div class="all_articles">
-    <h2><%= link_to article.title, article_path(article) %></h2>
-    <p class="joined_body"><%= article.body %></p>
-    <p class="joined_players"><%= article.player_names.length %> joined out of <%= article.players%>: <%= article.player_names.join(", ")%></p>
-    </div>
+  <div class="all_articles">
+      <div class="general-data">
+          <h2 class="art-title"><%= link_to article.title.length >= 20 ? article.title.first(20) + "..." : article.title, article_path(article), 'data-no-turbolink' => true %></h2>
+          <p> Setting: <%= article.setting %> <br>
+           Location: <%= article.location %></p>
+          <p class="joined_body"><%= article.body.length >= 60 ? article.body.first(60) + "..." : article.body  %></p>
+      </div>
+      <div class="game-date">
+          <p class="month"><%= article.month.to_s.first(3) %></p>
+          <h2 class="day"><%= article.day.to_i.floor %></h2>
+          <p class="time"><%=  article.time %> pm</p>
+      </div>
+      <div class="players"></div>
+          <p class="joined_players"><%= article.player_names.length %> spots filled: <%= article.players%> left </p>
+          <p class = "postedby">posted by: </span>
+          <% if article.users.length >= 1 %>
+              <a href='/users/<%=article.users.first.id %>'><span class=posted> <%= article.users.first.email.split('@')[0] %> </span></a>
+          <% end %>
+      </p>
+  </div>
   <% end %>
 </div>
 
