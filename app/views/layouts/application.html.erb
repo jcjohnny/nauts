@@ -23,7 +23,9 @@
                     <h2>Sports Started</h2>
 
                     <% current_user.articles.take(5).each do |art| %>
+                    <% if art.users.first.email == current_user.email %>
                     <p><%= link_to art.title, article_path(art), 'data-no-turbolink' => true %></p>
+                    <% end %>
                     <% end %>
 
 

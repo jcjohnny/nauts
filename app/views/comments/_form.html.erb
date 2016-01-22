@@ -2,15 +2,14 @@
 
 <%= form_for [ @article, @comment ] do |f| %>
   <p>
-    <%= f.label :author_name, current_user.email %><br/>
-    <%= f.text_field :author_name, :value => current_user.email, class: "no-show-user" %>
+
+    <%= f.text_field :author_name, :value => current_user.email, class: "no-show-user", :readonly => true%>
   </p>
 
   <p>
-    <%= f.label :body, class: 'form-style-5'  %><br/>
-    <%= f.text_area :body, class: 'form-style-5'  %>
+    <%= f.text_area :body, :placeholder => "comment", :required => true%>
   </p>
   <p>
-    <%= f.submit 'Submit' %>
+    <%= f.submit 'Submit', class: "btn btn-default"%>
   </p>
 <% end %>

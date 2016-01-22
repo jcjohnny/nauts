@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20160105191547) do
     t.text     "setting"
     t.text     "month"
     t.float    "day"
-    t.float    "time"
+    t.text     "time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"

@@ -2,20 +2,33 @@
 <script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"></script>
 
 
-<ul id="article-control">
-    <li><div id ="back-article"><%= link_to '<< Back to Articles List', articles_path, 'data-no-turbolink' => true%></div></li>
-    <li><div id ="delete-article"><%= link_to 'delete', article_path(@article), method: :delete, data: {confirm: "Really delete the article?"} %></div></li>
-    <li><div id= "edit-article"><%= link_to 'edit', edit_article_path(@article) %></div>
-    </li>
-</ul>
+<div class="view-holder">
 
+
+    <ul id="article-control">
+        <li><%= link_to '< back to games', articles_path, 'data-no-turbolink' => true, id: "back-article"%></li>
+        <% if user_signed_in? %>
+        <% if  (@article.users.exists? )%>
+        <% if (@article.users.first.email == current_user.email) %>
+        <li><%= link_to 'delete', article_path(@article), id: "delete-article",  method: :delete, data: {confirm: "Really delete the article?"} %></li>
+        <li><%= link_to 'edit', edit_article_path(@article), id: "edit-article" %></li>
+        <% end %>
+        <% end %>
+        <% end %>
+    </ul>
+</div>
+<% if user_signed_in? %>
+<%= link_to "Start A Sports Game", new_article_path, class: "new_article" %>
+<% else %>
+<%= link_to 'login to start a game', '/users/sign_in', method: :get, class: "new_article" %>
+<% end %>
 <div class="game-info">
 
 
 
-<div id= "googlymap">
-  <div id="map" style='height: 400px;'></div>
-</div>
+    <div class="gmapper">
+        <div id="map" style=' height: 350px;'></div>
+    </div>
 
 
 <p>
@@ -25,40 +38,50 @@
   <% end %>
 </p>
 
-<% if @article.users.length >= 1 %>
-posted by: <a href='/users/<%=@article.users.first.id %>'> <%= @article.users.first.email %> </a>
-<% end %>
-<%= @article.users.length %>
 
 
-<div id="h1-title"><h1><%= @article.title %></h1></div>
-<% if @article.image.exists? %>
-    <%= image_tag @article.image.url %><br/>
-<% end %>
-<p><%= @article.body %></p>
-<p>address: <%= @article.geo_address %></p>
-<p>sport:<%= @article.sport %></p>
-<p>date <%= @article.created_at.strftime("%b %d, %Y") %> @ <%=@article.created_at.strftime("%l %M, %S")   %></p>
-<div class="players-list">
-    <ul>
-        <% @article.users.each do |users|  %>
-        <li><%= users.email %></li>
-        <% end %>
-    </ul>
-</div>
 
-
-    <div class="addplayer"></div>
-    click the button to join this event!
-    <%= form_for @article do |f| %>
-    <p class="hideforplayer">
-      <%= f.label :title %><br />
-      <%= f.text_field :title %>
-    </p>
-    <p>
-      <%= f.submit %>
-    </p>
+<div class="article-game-info">
+    <div class="game-date">
+        <p class="month"><%= @article.month.to_s.first(3) %></p>
+        <h2 class="day"><%= @article.day.to_i.floor %></h2>
+        <p class="time"><%=  @article.time %></p>
+    </div>
+    <div class=game-data>
+    <div id="h1-title"><h1><%= @article.title %></h1></div>
+    <% if @article.users !=[] %>
+    <p class="postauthor"><span class="talic">posted by: </span> <a href='/users/<%=@article.users.first.id %>'> <%= @article.users.first.email %> </a>on <%= @article.created_at.strftime("%b %d, %Y") %> </p>
     <% end %>
+
+    <p><span class="talic"> sport: </span><%= @article.sport %> </p>
+
+    <p><span class="talic">description:</span> <br>
+        <%= @article.body %> </p>
+    <p>
+        <span class="talic"> Setting: </span><%= @article.setting %>  <br>
+        <span class="talic"> Location: </span><%= @article.location %>  <br>
+        <span class="talic"> Address: </span><%= @article.address%> <%= @article.city %> <%= @article.state %> <%= @article.zipcode %>
+    </p>
+
+    <div class="players-list">
+        <ul>
+            <li>    <span class="talic"> players joined: </span> </li>
+            <% @article.users.each do |users|  %>
+            <li><%= link_to users.email, users %></li>
+            <% end %>
+        </ul>
+        <%= @article.players - @article.users.length %> spots left out of <%= @article.players %>
+
+
+    </div>
+
+
+    <%= form_for @article do |f| %>
+    <p class="hideforplayer"><%= f.label :title %> <%= f.text_field :title %></p>
+    <p class="join-party"> <%= f.submit "join game"%></p>
+    <% end %>
+    </div>
+    </div>
 </div><!--gameinfo div  -->
 
 
@@ -69,20 +92,16 @@ posted by: <a href='/users/<%=@article.users.first.id %>'> <%= @article.users.fi
     <% if user_signed_in? %>
     <div id="comments_form">
       <%= render partial: 'comments/form' %>
-      <%= current_user.name %></br>
-      <%= current_user.email %></br>
-
     </div>
+
     <% else %>
     <div id="comments-login">
-        <p>
-            please login to post a message
+        <p class="logininplease">
+            please <span><%= link_to 'login', '/users/sign_in', method: :get  %></span> to post a message
         </p>
-        <%= button_to 'Login', '/login', method: :get  %>
     </div>
     <% end %>
 </div>
-
 
 
 

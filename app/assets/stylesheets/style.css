@@ -1,22 +1,56 @@
-@import url(https://fonts.googleapis.com/css?family=Oswald:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900);
 
 * {
-    font-family: 'Oswald', sans-serif !important;
+    font-family: 'Titillium Web', sans-serif !important;
+}
+
+form input[type=text], form input[type=password], form input[type=email], form input[type=number], form input[type=url], form input[type=tel], form input[type=date], form textarea {
+    border-radius: 5px;
+    margin: 5px 0;
+    padding: 11px;
+    font-size: 14px;
+    font-weight: 300;
+        width: 100%;
+}
+
+
+form input[type=submit], form input[type=button], form button {
+    border-radius: 0px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.0em;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 12px;
+    margin-right: 3px;
+    padding: 7px 16px 6px;
+    text-decoration: none;
+    background-color: orange;
+    background-image: none;
+    text-shadow: none;
+    box-shadow: none;
+    border: none;
+    border-color: none;
+    border-top-color: none;
+    border-right-color: none;
+    border-bottom-color: none;
+    color: black;
+    cursor: pointer;
 }
 
 .navbar-header img {
-    -webkit-box-shadow: 5px 4px 1px 0px rgba(0,0,0,0.35);
-    -moz-box-shadow: 5px 4px 1px 0px rgba(0,0,0,0.35);
-    box-shadow: 5px 4px 1px 0px rgba(0,0,0,0.35);
+    -webkit-box-shadow: 3px 2px 1px 0px rgba(0,0,0,0.35);
+    -moz-box-shadow: 3px 2px 1px 0px rgba(0,0,0,0.35);
+    box-shadow: 3px 2px 1px 0px rgba(0,0,0,0.35);
     position: fixed;
     left: -4px;
+    width: 49px;
     padding: 10px 35px;
     top: 6px;
     border-top: 2px solid rgba(204, 204, 204, 0.7);
 }
 
 .nav.navbar-nav.navbar-left {
-    margin-top: 90px;
+    margin-top: 60px;
 }
 
 ul {
@@ -37,13 +71,12 @@ a, a:link, a:visited {
 .leftbar {
     float: left;
     border-right: 2px solid #ccc;
-    width: 260px;
+    width: 240px;
     position: fixed;
     top: 20px;
     bottom: 20px;
-    left: 20px;
+    padding: 20px;
 }
-
 
 p.flash {
     position: absolute;
@@ -79,7 +112,8 @@ p.flash {
     min-width: 300px;
     width: 29%;
     height: 150px;
-    border: 6px solid orange;
+    border: 3px solid orange;
+    border-top: 10px solid orange;
     margin: 1%;
     padding: 5px;
     position: relative;
@@ -89,7 +123,7 @@ p.flash {
 .view-holder {
     display: inline-block;
     font-size: 20px;
-    margin-top: 30px;
+    margin-top: 24px;
     margin-bottom: 30px;
 }
 
@@ -98,10 +132,6 @@ p.flash {
     margin-right: 10px;
 }
 
-a.new_article {
-    float: right;
-    margin-top: 2.5%;
-}
 
 .hideforplayer {
     display: none;
@@ -115,9 +145,8 @@ a.new_article {
     width: 60px;
     height: 100px;
     text-align: center;
-    padding-left: 5px;
+    padding: 5px;
 }
-
 
 p.month {
     margin: 0;
@@ -149,8 +178,10 @@ h2.art-title {
     color: black;
     text-transform: uppercase;
     margin: 0;
-    font-weight: 600;
+    font-weight: 700;
 }
+
+
 
 p.joined_body {
     margin-top: 10px;
@@ -161,15 +192,16 @@ a, a:link, a:visited {
     color: black;
 }
 
-.all_articles p {
-    padding: 0;
-    margin: 0;
+.articles-created p {
+    margin: 0px;
+    font-style: italic;
 }
 
 p.postedby {
     position: absolute;
     right: 8px;
     bottom: 0;
+    margin: 0;
 }
 
 span.posted {
@@ -181,6 +213,7 @@ p.joined_players {
     position: absolute;
     bottom: 3px;
     left: 8px;
+    margin: 0;
 }
 
 p.joined_body {
@@ -194,6 +227,8 @@ p.joined_body {
 a.new_article {
     background-color: orange;
     padding: 8px;
+    float: right;
+    margin-top: 24px;
 }
 
 .dropdown.view {
@@ -249,4 +284,215 @@ span.loggerout {
 
 .dropdown-content a:hover {
     border-bottom: 1px solid orange;
+}
+
+
+.comments-area {
+    float: right;
+    width: 47%;
+}
+
+.article-game-info {
+    float: left;
+    position: relative;
+    width: 47%;
+}
+
+#h1-title h1 {
+    font-size: 33px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0;
+    color: black;
+}
+
+.players-list ul li {
+    display: inline-block;
+}
+
+.article-game-info .game-date {
+    left: 0;
+}
+
+.game-data {
+    margin-left: 90px;
+}
+
+.game-data p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+span.talic {
+    font-style: italic;
+    font-size: 12px;
+    text-transform: lowercase;
+}
+
+p.postauthor {
+    margin: 0;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.comments-area h4 {
+    margin: 0;
+}
+
+.comments-area p {
+    margin: 0;
+}
+
+#h1-title {
+    border-bottom: 1px solid orange;
+    padding-bottom: 3px;
+}
+
+
+p.comment {
+    font-size: 14px;
+}
+
+p.comment-post {
+    font-style: italic;
+    font-size: 10px;
+}
+
+#comments_form h3 {
+    margin-bottom: 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-top: 30px;
+}
+
+#commeter div {
+    margin: 0px 0 10px;
+    border-bottom: 1px solid orange;
+    margin-right: 20%;
+    padding: 10px;
+}
+
+.comments-area h3 {
+    margin: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-left: 1px solid orange;
+    padding-left: 8px;
+}
+
+form input[type=submit]:not(.disabled):hover, form input[type=button]:not(.disabled):hover, form button:not(.disabled):hover {
+    background-color: #8b9297;
+    background-image: none;
+}
+
+.article-field {
+    display: block;
+}
+
+label {
+    font-size: 12px;
+    text-transform: uppercase;
+    padding-left: 2px;
+}
+
+.labler {
+    width: 90px;
+    margin-right: 18px;
+}
+
+.fielder {
+    margin-bottom: 10px;
+}
+
+form#new_comment {
+    width: 78%;
+}
+
+.setting-sport.article-field .article-field:last-child {
+    margin-right: 0;
+}
+
+.setting-sport.article-field .article-field {
+    width: 45%;
+    float: left;
+    margin-right: 10%;
+}
+.location-players .article-field:last-child {
+    margin-right: 0;
+}
+
+.location-players .article-field {
+    width: 45%;
+    float: left;
+    margin-right: 10%;
+}
+
+.edit_article, #new_article  {
+    max-width: 800px;
+}
+
+.addresser .article-field {
+    width: 28%;
+    float: left;
+    margin-right: 8%;
+}
+
+.addresser .article-field:last-child {
+    margin-right: 0;
+}
+
+.date-time .article-field{
+    width: 28%;
+    float: left;
+    margin-right: 8%;
+}
+
+.date-time .article-field:last-child{
+    margin-right: 0;
+}
+
+input[type="submit"] {
+    margin: 10px 0;
+}
+
+a:hover {
+    color: orange;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .3s;
+}
+
+a.new_article:hover {
+    background-color: black;
+}
+
+#delete-article, #edit-article, #back-article {
+    border: 1px solid orange;
+    padding: 8px;
+    font-size: 14px;
+}
+#delete-article{
+    margin-left: 30px;
+}
+
+a#delete-article:hover, a#edit-article:hover, a#back-article:hover{
+    color: orange;
+    background-color: black;
+}
+
+select#article_sport {
+    background: transparent;
+    width: 106%;
+    padding: 5px 35px 5px 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-top: 5px;
+    height: 43px;
+    font-size: 14px;
+    font-weight: 300;
 }

@@ -1,71 +1,91 @@
+
 <%= form_for(@article, html: {multipart: true}) do |f| %>
-  <ul>
-  <% @article.errors.full_messages.each do |error| %>
-    <li><%= error %></li>
-  <% end %>
-  </ul>
+    <ul>
 
-  <p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </p>
-  <p>
-      <%= f.label :setting %>
-      <%= f.text_field :setting %>
-  </p>
-  <p>
-      <%= f.label :month %>
-      <%= f.text_field :month %>
-  </p>
+        <% @article.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+        <% end %>
+    </ul>
 
-  <p>
-      <%= f.label :day %>
-      <%= f.number_field :day %>
-  </p>
+    <div class="article-field">
+        <div class="labler"><%= f.label :title %></div>
+        <div class="fielder"><%= f.text_field :title, :placeholder => "Full court game", :required => true %></div>
+    </div>
 
-  <p>
-      <%= f.label :time %>
-      <%= f.text_field :time %>
-  </p>
+    <div class="article-field">
+        <div class="labler"><%= f.label :body %></div>
+        <div class="fielder"><%= f.text_area :body, :placeholder => "Looking for players to play on one of the most beautiful...", :required => true %></div>
+    </div>
 
-  <p>
-      <%= f.label :location %>
-      <%= f.text_field :location %>
-  </p>
-  <p>
-      <%= f.label :address %>
-      <%= f.text_field :address %>
-  </p>
-  <p>
-      <%= f.label :city %>
-      <%= f.text_field :city %>
-  </p>
-  <p>
-      <%= f.label :state %>
-      <%= f.text_field :state %>
-  </p>
-  <p>
-      <%= f.label :zipcode %>
-      <%= f.number_field :zipcode %>
-  </p>
-  <p>
-      <%= f.label :sport %>
-      <%= f.text_field :sport %>
-  </p>
-  <p>
-      <%= f.label :players %>
-      <%= f.number_field :players %>
-  </p>
+    <div class="setting-sport article-field">
+        <div class="article-field">
+            <div class="labler"><%= f.label :setting %></div>
+            <div class="fielder"><%= f.text_field :setting, :placeholder => "ex: outdoors, indoors, park", :required => true %></div>
+        </div>
 
-  <p>
-      <%= f.label :tag_list %> <br />
-      <%= f.text_field :tag_list %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+        <div class="article-field">
+            <div class="labler"><%= f.label :sport %></div>
+            <div class="fielder"><%= f.select :sport, [['Basketball','basketball'],['Football','Football'],['Soccer','soccer'],['Baseball','baseball']], :required => true %></div>
+        </div>
+
+    </div>
+
+    <div class="location-players">
+        <div class="article-field">
+            <div class="labler"><%= f.label :location %></div>
+            <div class="fielder"><%= f.text_field :location, :placeholder => "ex: ruckers park", :required => true %></div>
+        </div>
+
+        <div class="article-field">
+            <div class="labler"><%= f.label :players %></div>
+            <div class="fielder"><%= f.number_field :players, :placeholder => "10", :required => true %></div>
+        </div>
+    </div>
+
+    <div class="article-field">
+        <div class="labler"><%= f.label :address %></div>
+        <div class="fielder"><%= f.text_field :address, :placeholder => "W 155th street & 8th Ave...", :required => true %></div>
+    </div>
+
+    <div class="addresser">
+        <div class="article-field">
+            <div class="labler"><%= f.label :city %></div>
+            <div class="fielder"><%= f.text_field :city, :placeholder => "new york", :required => true %></div>
+        </div>
+
+        <div class="article-field">
+            <div class="labler"><%= f.label :state %></div>
+            <div class="fielder"><%= f.text_field :state, :placeholder => "NY", :required => true %></div>
+        </div>
+
+        <div class="article-field">
+            <div class="labler"><%= f.label :zipcode %></div>
+            <div class="fielder"><%= f.number_field :zipcode, :placeholder => "10039, 10201" %></div>
+        </div>
+    </div>
+
+    <div class="date-time">
+        <div class="article-field">
+            <div class="labler"><%= f.label :month %></div>
+            <div class="fielder"><%= f.text_field :month, :placeholder => "january, february", :required => true %></div>
+        </div>
+
+        <div class="article-field">
+            <div class="labler"><%= f.label :day %></div>
+            <div class="fielder"><%= f.number_field :day, :placeholder => "1..29" %></div>
+        </div>
+
+        <div class="article-field">
+            <div class="labler"><%= f.label :time %></div>
+            <div class="fielder"><%= f.text_field :time, :placeholder => "6:30 pm", :required => true %></div>
+        </div>
+    </div>
+
+    <div class="article-field">
+        <div class="labler"><%= f.label :tag_list %> </div>
+        <div class="fielder"><%= f.text_field :tag_list, :placeholder => "3v3, 4v4, full court..." %></div>
+    </div>
+    <p><%= f.submit id: "submitter" %></p>
+
+
 <% end %>

@@ -5,21 +5,25 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+      @articles = Article.all
       @comments = Comment.all
   end
 
   # GET /users/1/edit
   def edit
+      @articles = Article.all
       @comments = Comment.all
   end
 
   def index
+      @articles = Article.all
       @comments = Comment.all
     @users = User.all
   end
 
   # PATCH/PUT /users/1
   def update
+      @articles = Article.all
       @comments = Comment.all
     if @user.update_attributes(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
