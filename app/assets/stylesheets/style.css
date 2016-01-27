@@ -585,6 +585,8 @@ p.right-user {
         text-align: right
 }
 
+
+
 @media only screen and (max-width: 1026px)  {
     .article-game-info {
         width: 100%;
