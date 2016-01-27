@@ -7,6 +7,10 @@
         <% end %>
     </ul>
 
+    <% if @article.users.length < 1 %>
+            <p class="hideforplayer"><%= f.text_field :player_names, :value => current_user.email, :required => true %></p>
+    <% end %>
+
     <div class="article-field">
         <div class="labler"><%= f.label :title %></div>
         <div class="fielder"><%= f.text_field :title, :placeholder => "Full court game", :required => true %></div>

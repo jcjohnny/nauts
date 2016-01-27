@@ -29,7 +29,6 @@ class ArticlesController < ApplicationController
         if @article.save
             flash.notice = "You've succesfully created the Article"
             @article.users.push(current_user)
-            @article.player_names.push(current_user.email.to_s)
             redirect_to @article
         else
             render new_article_path

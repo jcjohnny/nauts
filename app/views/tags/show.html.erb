@@ -34,8 +34,17 @@
     </div>
 </div>
 
-
+<div class="rightsign">
+    <% if user_signed_in? %>
+    <p class="right-user">
+        <%= link_to current_user.email.split('@')[0], current_user %> <span class="loggerout"><%= link_to "Logout", destroy_user_session_path %></span>
+    </p>
     <%= link_to "Start A Sports Game", new_article_path, class: "new_article" %>
+    <% else %>
+    <p class="right-user"><%= link_to "Login", new_user_session_path %></p>
+    <%= link_to 'login to start a game', '/users/sign_in', method: :get, class: "new_article" %>
+    <% end %>
+</div>
 
 <div class="gmapper">
   <div id="map" style=' height: 400px;'></div>

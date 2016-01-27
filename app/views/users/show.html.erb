@@ -1,9 +1,62 @@
 <p id="notice"><%= notice %></p>
 
+<div class="headpart">
+    <% if user_signed_in? && current_user.email == @user.email %>
+        <h2>displaying your profile <span><%= link_to 'Edit', edit_user_path(@user) %></span></h2>
+        <% else %>
+        <h2><%= @user.email.split('@')[0] %>s profile</h2>
+    <% end %>
+
+</div>
+
 <p>
-  <strong>Name:</strong>
-	  <%= (image_tag @user.image_url(:thumb).to_s) %>
-  <%= @user.name %>
+  <strong>Username:</strong>
+    <% if @user.name == nil %>
+        No chosen Username
+    <% else %>
+    <%= @user.name %>
+    <% end %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %>
+<p><strong>About:</strong>
+    <% if @user.about == nil %>
+        No about information
+    <% else %>
+    <%= @user.about %>
+    <% end %>
+</p>
+
+
+
+
+<div class="section-container">
+    <div class="profile-started">
+        <h2>games started</h2>
+        <% @articles.each do |article| %>
+            <% if article.player_names == @user.email %>
+            <p><%= link_to article.title, article_path(article), 'data-no-turbolink' => true %></p>
+            <% end  %>
+        <% end  %>
+    </div>
+
+    <div class="profile-started">
+        <h2>Games Joined</h2>
+        <% @articles.each do |art| %>
+            <% limit = 0 %>
+            <% if art.users.exists?(:email => @user.email) %>
+                <p><%= link_to art.title, article_path(art), 'data-no-turbolink' => true %></p>
+                <% limit += 1 %>
+                <% break if limit == 5 %>
+            <% end %>
+        <% end %>
+    </div>
+
+    <div class="profile-started">
+        <h2>Comments</h2>
+        <% @comments.where(:author_name => @user.email).each do |art| %>
+        <p>
+            <%= link_to art.body, article_path(art.article_id), 'data-no-turbolink' => true %>
+        </p>
+        <% end %>
+    </div>
+</div>

@@ -124,7 +124,7 @@ p.flash {
     display: inline-block;
     font-size: 20px;
     margin-top: 24px;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
 }
 
 .view {
@@ -181,12 +181,6 @@ h2.art-title {
     font-weight: 700;
 }
 
-
-
-p.joined_body {
-    margin-top: 10px;
-}
-
 a, a:link, a:visited {
     text-decoration: none;
     color: black;
@@ -228,7 +222,8 @@ a.new_article {
     background-color: orange;
     padding: 8px;
     float: right;
-    margin-top: 24px;
+    margin-top: none;
+    font-size: 13px;
 }
 
 .dropdown.view {
@@ -256,10 +251,6 @@ span.loggerout {
     margin-top: 20px;
     text-transform: uppercase;
     font-size: 17px;
-}
-
-.articles-created p {
-    margin: 0px;
 }
 
 .articles-created h2 {
@@ -496,3 +487,229 @@ select#article_sport {
     font-size: 14px;
     font-weight: 300;
 }
+
+
+.form-inputs {
+    max-width: 800px;
+}
+
+.headpart h1, .headpart h2 {
+    margin: 25px 0;
+    font-size: 29px;
+    border-bottom: 1px solid orange;
+    max-width: 800px;
+    padding-bottom: 9px;
+    color: black;
+        text-transform: capitalize;
+}
+
+form#new_user {
+    max-width: 800px;
+}
+
+a.linkedin1, a.google_oauth21 {
+    display: none;
+}
+
+a.github1 {
+    background-image: url("https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png");
+    height: 30px;
+    display: block;
+    padding-left: 40px;
+    line-height: 30px;
+    background-color: #3D5C98;
+    max-width: 120px;
+    min-width: 100px;
+    color: white;
+    background-size: 30px;
+    background-repeat: no-repeat;
+}
+a.twitter1 {
+    background-image: url("http://i.imgur.com/LnnlQil.png");
+    height: 30px;
+    display: block;
+    padding-left: 40px;
+    line-height: 30px;
+    background-color: #3D5C98;
+    max-width: 120px;
+    min-width: 100px;
+    color: white;
+    background-size: 30px;
+background-repeat: no-repeat;
+}
+
+
+a.facebook1 {
+    background-image: url("http://i.imgur.com/VMMMyvg.png");
+    height: 30px;
+    display: block;
+    padding-left: 40px;
+    line-height: 30px;
+    background-color: #3D5C98;
+    max-width: 120px;
+    min-width: 100px;
+    color: white;
+    background-size: 30px;
+background-repeat: no-repeat;
+}
+
+.section-container {
+    max-width: 800px;
+    position: relative;
+    display: block;
+}
+
+.profile-started {
+    display: block;
+    float: left;
+    width: 33%;
+}
+
+.headpart span {
+    margin-left: 26px;
+    font-size: 16px;
+}
+
+.profile-started h2 {
+    text-transform: uppercase;
+    margin-bottom: 1px;
+}
+
+.profile-started p {
+    margin: 0px;
+    font-style: italic;
+}
+
+p.right-user {
+    display: none;
+}
+
+.rightsign {
+    float: right;
+        margin-top: 20px;
+        text-align: right
+}
+
+@media only screen and (max-width: 1026px)  {
+    .article-game-info {
+        width: 100%;
+    }
+
+    .comments-area {
+        margin-top: 40px;
+        float: left;
+        width: 100%;
+    }
+
+    #commeter div {
+        margin-right: 0;
+    }
+
+    .profile-started {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+}
+
+@media only screen and (max-width: 800px)  {
+    .nav.navbar-nav.navbar-left {
+        display: none;
+    }
+
+    .rightsign {
+    float: right;
+    margin-top: 10px;
+    text-align: right;
+    }
+
+    p.right-user {
+        display: block;
+        margin-right: 10px;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    a.new_article {
+        float: none;
+    }
+
+
+    a.new_article {
+        padding: 5px;
+        margin-top: 0;
+        font-size: 10px;
+    }
+
+    .container{
+        margin: 0;
+        padding: 0 20px;
+    }
+
+    .leftbar {
+        float: left;
+        border: none;
+        width: 0;
+        top: 20px;
+        bottom: 0;
+        padding: 0;
+        z-index: 99;
+    }
+
+    .navbar-header img {
+        padding: 2px 11px;
+    }
+
+    .view-holder {
+        font-size: 14px;
+        width: 160px;
+        margin-bottom: 15px;
+        margin-top: 16px;
+        margin-left: 70px;
+    }
+
+
+    #delete-article, #edit-article, #back-article {
+        border: 1px solid orange;
+        padding: 4px;
+        font-size: 11px;
+    }
+
+    #delete-article {
+        margin-left: 0;
+    }
+
+    .edit_article, #new_article {
+        min-width: 330px;
+    }
+
+    .headpart h1, .headpart h2 {
+        font-size: 18px;
+        margin-left: 70px;
+    }
+
+    #new_user {
+        max-width: 95%;
+    }
+
+    ul#article-control {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .edit_article, #new_article {
+        max-width: 95%;
+    }
+    .gmapper {
+    margin-bottom: 20px;
+}
+}
+
+/*@media only screen and (max-width: 800px)  {
+    .view-holder {
+    font-size: 14px;
+    width: 140px;
+    margin-bottom: 15px;
+    margin-top: 14px;
+}
+}*/

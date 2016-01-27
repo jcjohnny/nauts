@@ -12,7 +12,7 @@
 
 <div class="leftbar">
     <div class="navbar-header">
-        <a href="../" class="navbar-brand"><img src="../assets/nautslogo.svg" alt=""></a>
+        <a href="../" class="navbar-brand"><img src="http://i.imgur.com/D0Dxbal.png" alt=""></a>
     </div>
 
     <div class="nav navbar-nav navbar-left">
@@ -23,34 +23,35 @@
                     <h2>Sports Started</h2>
 
                     <% current_user.articles.take(5).each do |art| %>
-                    <% if art.users.first.email == current_user.email %>
+                    <% if art.player_names == current_user.email %>
+                        <p><%= link_to art.title, article_path(art), 'data-no-turbolink' => true %></p>
+                    <% end %>
+                    <% end %>
+
+
+                    <h2>Games Joined</h2>
+                    <% @articles.take(5).each do |art| %>
+                    <% limit = 0 %>
+                    <% if art.users.exists?(:email => current_user.email) %>
                     <p><%= link_to art.title, article_path(art), 'data-no-turbolink' => true %></p>
+                    <% limit += 1 %>
+                    <% break if limit == 5 %>
                     <% end %>
                     <% end %>
-
-
+                    
                     <h2>Comments</h2>
                     <% @comments.where(:author_name => current_user.email).take(5).each do |art| %>
                         <p>
                         <%= link_to art.body, article_path(art.article_id), 'data-no-turbolink' => true %>
                         </p>
                     <% end %>
-                <h2>Games Joined</h2>
-                <% @articles.take(5).each do |art| %>
-                <% limit = 0 %>
-                <% if art.users.exists?(:email => current_user.email) %>
-                    <p><%= link_to art.title, article_path(art), 'data-no-turbolink' => true %></p>
-                    <% limit += 1 %>
-                    <% break if limit == 5 %>
-                <% end %>
-                <% end %>
                 </div>
 
 
             </div>
         <% else %>
-            <div><%= link_to "Sign in", new_user_session_path %></div>
-            <p>please sign-in or login to start games or join them!</p>
+            <div><%= link_to "Login", new_user_session_path %></div>
+            <p>please sign-up or login to start games or join them!</p>
         <% end %>
     </div>
 

@@ -4,12 +4,11 @@
 
 <div class="view-holder">
 
-
     <ul id="article-control">
-        <li><%= link_to '< back to games', articles_path, 'data-no-turbolink' => true, id: "back-article"%></li>
+        <li><%= link_to '< back', articles_path, 'data-no-turbolink' => true, id: "back-article"%></li>
         <% if user_signed_in? %>
         <% if  (@article.users.exists? )%>
-        <% if (@article.users.first.email == current_user.email) %>
+        <% if (@article.player_names == current_user.email) %>
         <li><%= link_to 'delete', article_path(@article), id: "delete-article",  method: :delete, data: {confirm: "Really delete the article?"} %></li>
         <li><%= link_to 'edit', edit_article_path(@article), id: "edit-article" %></li>
         <% end %>
@@ -17,13 +16,20 @@
         <% end %>
     </ul>
 </div>
-<% if user_signed_in? %>
-<%= link_to "Start A Sports Game", new_article_path, class: "new_article" %>
-<% else %>
-<%= link_to 'login to start a game', '/users/sign_in', method: :get, class: "new_article" %>
-<% end %>
-<div class="game-info">
 
+<div class="rightsign">
+    <% if user_signed_in? %>
+    <p class="right-user">
+        <%= link_to current_user.email.split('@')[0], current_user %> <span class="loggerout"><%= link_to "Logout", destroy_user_session_path %></span>
+    </p>
+    <%= link_to "Start A Sports Game", new_article_path, class: "new_article" %>
+    <% else %>
+    <p class="right-user"><%= link_to "Login", new_user_session_path %></p>
+    <%= link_to 'login to start a game', '/users/sign_in', method: :get, class: "new_article" %>
+    <% end %>
+</div>
+
+<div class="game-info">
 
 
     <div class="gmapper">
@@ -49,8 +55,8 @@
     </div>
     <div class=game-data>
     <div id="h1-title"><h1><%= @article.title %></h1></div>
-    <% if @article.users !=[] %>
-    <p class="postauthor"><span class="talic">posted by: </span> <a href='/users/<%=@article.users.first.id %>'> <%= @article.users.first.email %> </a>on <%= @article.created_at.strftime("%b %d, %Y") %> </p>
+    <% if @article.users != [] %>
+    <p class="postauthor"><span class="talic">posted by: </span> <%= @article.player_names %> on <%= @article.created_at.strftime("%b %d, %Y") %> </p>
     <% end %>
 
     <p><span class="talic"> sport: </span><%= @article.sport %> </p>
@@ -75,11 +81,21 @@
 
     </div>
 
+    <% if user_signed_in? %>
+        <%= form_for @article do |f| %>
+            <% if @article.users.length < 1 %>
+                    <p class="hideforplayer"><%= f.text_field :player_names, :value => current_user.email, :required => true %></p>
+            <% end %>
+        <p class="hideforplayer"><%= f.label :title %> <%= f.text_field :title %></p>
+        <p class="join-party"> <%= f.submit "join game"%></p>
+        <% end %>
 
-    <%= form_for @article do |f| %>
-    <p class="hideforplayer"><%= f.label :title %> <%= f.text_field :title %></p>
-    <p class="join-party"> <%= f.submit "join game"%></p>
+    <% else %>
+        <p class="logininplease">
+            please <span><%= link_to 'login', '/users/sign_in', method: :get  %></span> to join this game
+        </p>
     <% end %>
+
     </div>
     </div>
 </div><!--gameinfo div  -->

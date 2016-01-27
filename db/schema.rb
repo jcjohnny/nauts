@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20160105191547) do
     t.string   "state"
     t.string   "sport"
     t.integer  "players"
-    t.text     "player_names",       default: [], array: true
+    t.text     "player_names"
     t.float    "latitude"
     t.float    "longitude"
     t.text     "location"
