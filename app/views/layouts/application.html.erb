@@ -50,8 +50,8 @@
 
             </div>
         <% else %>
-            <div><%= link_to "Login", new_user_session_path %></div>
-            <p>please sign-up or login to start games or join them!</p>
+            <div><%= link_to "Login/Sign-up", new_user_session_path %></div>
+            <p>please <%= link_to "sign-up", "/users/sign_up" %> or <%= link_to "login", "/users/sign_in" %> to start games or join them!</p>
         <% end %>
     </div>
 
