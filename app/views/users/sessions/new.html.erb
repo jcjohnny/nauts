@@ -1,4 +1,4 @@
-<h2>Sign in</h2>
+<div class="headpart"><h2>Sign in</h2></div>
 
 <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal' }) do |f| %>
   <div class="form-inputs">
@@ -12,4 +12,4 @@
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+<%# render "users/shared/links" %>

@@ -4,7 +4,7 @@
     <% if user_signed_in? && current_user.email == @user.email %>
         <h2>displaying your profile <span><%= link_to 'Edit', edit_user_path(@user) %></span></h2>
         <% else %>
-        <h2><%= @user.email.split('@')[0] %>s profile</h2>
+        <h2><%= @user.email.split('@')[0] %>'s profile</h2>
     <% end %>
 
 </div>
