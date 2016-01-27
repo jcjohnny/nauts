@@ -11,4 +11,5 @@ $(document).on('ready page:load', function () {
 	 $('a:contains("Sign in with")').remove();
 	 $('h2:contains("Log in")').wrap("<div class='headpart'></div>)");
  $('h2:contains("Sign up")').wrap("<div class='headpart'></div>)");
+ $('h2:contains("Forgot your password")').wrap("<div class='headpart'></div>)");
 });

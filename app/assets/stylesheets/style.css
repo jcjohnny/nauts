@@ -697,16 +697,11 @@ p.right-user {
     .edit_article, #new_article {
         max-width: 95%;
     }
+
+    .field {
+    max-width: 95%;
+}
     .gmapper {
     margin-bottom: 20px;
 }
 }
-
-/*@media only screen and (max-width: 800px)  {
-    .view-holder {
-    font-size: 14px;
-    width: 140px;
-    margin-bottom: 15px;
-    margin-top: 14px;
-}
-}*/
