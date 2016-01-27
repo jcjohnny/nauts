@@ -586,6 +586,10 @@ p.right-user {
 }
 
 
+p.article-p {
+    text-transform: capitalize;
+}
+
 
 @media only screen and (max-width: 1026px)  {
     .article-game-info {

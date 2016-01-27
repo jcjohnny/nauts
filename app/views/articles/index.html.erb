@@ -44,8 +44,8 @@
         <div class="all_articles">
             <div class="general-data">
                 <h2 class="art-title"><%= link_to article.title.length >= 20 ? article.title.first(20) + "..." : article.title, article_path(article), 'data-no-turbolink' => true %></h2>
-                <p> Setting: <%= article.setting %> <br>
-                 Location: <%= article.location %></p>
+                <p class="article-p"> <span class="talic">Setting:</span> <%= article.setting %> <br>
+                 <span class="talic">Location</span>: <%= article.location %></p>
                 <p class="joined_body"><%= article.body.length >= 60 ? article.body.first(60) + "..." : article.body  %></p>
             </div>
             <div class="game-date">
@@ -54,7 +54,7 @@
                 <p class="time"><%=  article.time %></p>
             </div>
             <div class="players"></div>
-                <p class="joined_players"><%= article.users.length %> joined out of <%= article.players%> </p>
+                <p class="joined_players"><%=  article.players - article.users.length %> spots left out of <%= article.players%> </p>
                 <p class = "postedby">posted by: </span>
                 <% if article.users.length >= 1 %>
                     <span class=posted> <%= link_to article.player_names, '/users/1' %> </span>
