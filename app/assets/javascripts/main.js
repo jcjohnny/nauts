@@ -8,5 +8,5 @@ $(document).on('ready page:load', function () {
 		}
 	 });
 
-	 $('div:contains("Sign in with Facebook")').last().remove()
+	 $('a:contains("Sign in with Facebook")').last().remove()
 });

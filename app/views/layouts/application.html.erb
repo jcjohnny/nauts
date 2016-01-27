@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NautsRails</title>
+  <title>Internauts</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -38,7 +38,7 @@
                     <% break if limit == 5 %>
                     <% end %>
                     <% end %>
-                    
+
                     <h2>Comments</h2>
                     <% @comments.where(:author_name => current_user.email).take(5).each do |art| %>
                         <p>
