@@ -62,6 +62,8 @@ group :development, :test do
 
 end
 
+
+
 group :development, :test do
   gem 'factory_girl_rails' # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md
   gem 'guard' # https://github.com/guard/guard
@@ -70,6 +72,9 @@ group :development, :test do
   gem 'pry-rails'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
 
 group :test do
   gem 'cucumber-rails', :require => false # https://github.com/cucumber/cucumber-rails

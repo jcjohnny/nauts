@@ -78,12 +78,7 @@ a, a:link, a:visited {
     padding: 20px;
 }
 
-p.flash {
-    position: absolute;
-    bottom: 2%;
-    left: 2%;
-    border: 1px solid;
-}
+
 
 .dropdown {
     position: relative;
@@ -238,7 +233,7 @@ p.flash {
     border: 1px solid;
     padding: 10px;
     width: 200px;
-    height: 50px;
+    height: 40px;
 }
 
 span.loggerout {
