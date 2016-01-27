@@ -12,16 +12,16 @@
 <% end %>
 
 <div>
-<!-- Connect Account <br> -->
+Connect Account <br>
 
-<!-- <% ['facebook', 'twitter', 'github'].each do |provider| %>
+<% ['facebook', 'twitter', 'github'].each do |provider| %>
 
   <% if current_user.authorizations.pluck(:provider).include?(provider.to_s) %>
     <%= provider.to_s.titleize %> Connected
   <% else %>
-      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path('user', provider) %>
+      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path('user', provider), class: provider.to_s %>
   <% end %>
 <br/>
-<% end %> -->
+<% end %>
 
 </div>
