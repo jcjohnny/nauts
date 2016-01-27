@@ -6,6 +6,7 @@ $(document).on('ready page:load', function () {
 		} else {
 			$('#article_tag_list').val($('#article_tag_list').val() + ", " + $('#article_sport').val() )
 		}
-
 	 });
+
+	 $('div:contains("Sign in with Facebook")').last().remove()
 });
